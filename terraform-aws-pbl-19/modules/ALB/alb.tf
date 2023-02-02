@@ -1,7 +1,7 @@
 # External Load Balancer for reverse proxy Nginx
 
 resource "aws_lb" "ext-alb" {
-  name     = "ext-alb"
+  name     = "var.name"
   internal = false
   security_groups = [var.public-sg]
 
@@ -63,14 +63,16 @@ resource "aws_lb" "ialb" {
   security_groups = [var.private-sg]
 
   subnets = [
-    var.vpc_subnet.private[0].id,
-    var.vpc_subnet.private[1].id
+    var.private-sbn-1,
+    var.private-sbn-2,
   ]
 
-  tags = {
-    Name = var.name
-  }
-
+  tags = merge(
+    var.tags,
+    {
+    Name = "ACS-int-alb"
+  },
+  )
 
   ip_address_type    = var.ip_address_type
   load_balancer_type = var.load_balancer_type

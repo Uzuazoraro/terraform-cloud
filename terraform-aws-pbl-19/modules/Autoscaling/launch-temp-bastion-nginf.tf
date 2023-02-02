@@ -1,12 +1,12 @@
-/*# Launch template for bastion
+# Launch template for bastion
 
 resource "aws_launch_template" "bastion-launch-template" {
-  image_id               = var.ami-web
+  image_id               = var.ami-bastion
   instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.bastion-sg.id]
+  vpc_security_group_ids = var.bastion-sg
 
   iam_instance_profile {
-    name = "aws_iam_instance_profile.ip.id"
+    name = var.instance_profile
   }
 
   key_name = var.keypair
@@ -22,9 +22,12 @@ resource "aws_launch_template" "bastion-launch-template" {
   tag_specifications {
     resource_type = "instance"
 
-    tags = {
+    tags = merge(
+      var.tags,
+      {
       Name = "bastion-launch-template"
-    }
+    },
+    )
   }
 
   user_data = filebase64("${path.module}/bastion.sh")
@@ -34,12 +37,12 @@ resource "aws_launch_template" "bastion-launch-template" {
 # path.module helps you determines the current working directory
 
 resource "aws_launch_template" "nginx-launch-template" {
-  image_id               = var.ami
+  image_id               = var.ami-nginx
   instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.nginx-sg.id]
+  vpc_security_group_ids = var.nginx-sg
 
   iam_instance_profile {
-    name = "aws_iam_instance_profile.ip.id"
+    name = var.instance_profile
   }
 
   key_name = var.keypair
@@ -55,10 +58,13 @@ resource "aws_launch_template" "nginx-launch-template" {
   tag_specifications {
     resource_type = "instance"
 
-    tags = {
+    tags = merge(
+      var.tags,
+      {
       Name = "nginx-launch-template"
-    }
+    },
+    )
   }
 
   user_data = filebase64("${path.module}/nginx.sh")
-}*/
+}

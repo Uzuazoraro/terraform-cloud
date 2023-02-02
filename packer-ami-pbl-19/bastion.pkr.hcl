@@ -33,7 +33,7 @@ source "amazon-ebs" "terraform-bastion-prj-19" {
 
 # a build block invokes sources and runs provisioning steps on them.
 build {
-    source = ["source.amazon-ebs.terraform-bastion-prj-19"]
+    sources = ["source.amazon-ebs.terraform-bastion-prj-19"]
 
     provisioner "shell" {
         script = "bastion.sh"

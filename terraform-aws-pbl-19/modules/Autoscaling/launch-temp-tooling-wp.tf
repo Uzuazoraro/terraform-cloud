@@ -1,4 +1,4 @@
-/*# launch template for wordpress
+# launch template for wordpress
 
 resource "aws_launch_template" "wordpress-launch-template" {
   image_id               = var.ami-web
@@ -38,7 +38,7 @@ resource "aws_launch_template" "wordpress-launch-template" {
 resource "aws_launch_template" "tooling-launch-template" {
   image_id               = var.ami-web
   instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.webserver-sg.id]
+  vpc_security_group_ids = var.web-sg
 
   iam_instance_profile {
     name = var.instance_profile
@@ -66,4 +66,4 @@ resource "aws_launch_template" "tooling-launch-template" {
   }
 
   user_data = filebase64("${path.module}/tooling.sh")
-}*/
+}

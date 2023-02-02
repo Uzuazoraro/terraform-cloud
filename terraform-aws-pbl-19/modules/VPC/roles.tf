@@ -1,4 +1,4 @@
-/*resource "aws_iam_role" "ec2_instance_role" {
+resource "aws_iam_role" "ec2_instance_role" {
   name = "ec2_instance_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -57,4 +57,4 @@ resource "aws_iam_role_policy_attachment" "test-attach" {
 resource "aws_iam_instance_profile" "ip" {
   name = "aws_instance_profile_test"
   role = aws_iam_role.ec2_instance_role.name
-}*/
+}

@@ -1,11 +1,11 @@
-/*# Get list of availability zones
+# Get list of availability zones
 
 data "aws_availability_zones" "available" {
   state = "available"
 }
 
 # creating sns topic for all the auto scaling groups
-resource "aws_sns_topic" "micolo-sns" {
+resource "aws_sns_topic" "ACS-sns" {
   name = "Default_CloudWatch_Alarms_Topic"
 }
 
@@ -24,7 +24,7 @@ resource "aws_autoscaling_notification" "micolo_notifications" {
     "autoscaling:EC2_INSTANCE_TERMINATE_ERROR",
   ]
 
-  topic_arn = aws_sns_topic.micolo-sns.arn
+  topic_arn = aws_sns_topic.ACS-sns.arn
 }
 
 resource "random_shuffle" "az_list" {
@@ -86,4 +86,4 @@ resource "aws_autoscaling_group" "nginx-asg" {
 resource "aws_autoscaling_attachment" "asg_attachment_nginx" {
   autoscaling_group_name = aws_autoscaling_group.nginx-asg.id
   alb_target_group_arn    = var.nginx-alb-tgt
-}*/
+}

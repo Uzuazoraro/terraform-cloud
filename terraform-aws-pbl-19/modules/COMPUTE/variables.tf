@@ -1,4 +1,4 @@
-variable "sg-compute" {
+variable "compute-sg" {
   type = string
   description = "security group for the file system"
 }

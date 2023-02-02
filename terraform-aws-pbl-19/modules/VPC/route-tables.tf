@@ -1,4 +1,4 @@
-/*# create private route table
+# create private route table
 resource "aws_route_table" "private-rtb" {
   vpc_id = aws_vpc.main.id
 
@@ -13,7 +13,7 @@ resource "aws_route_table" "private-rtb" {
 # create route for the private route table and attach the nat gateway
 # The route determines the path of the flow of traffic
 # Private route table make use of the nat-gateway
-resource "aws_route" "Private-rtb-route" {
+resource "aws_route_table_association" "Private-rtb-route" {
   route_table_id         = aws_route_table.private-rtb.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_nat_gateway.nat.id
@@ -22,8 +22,8 @@ resource "aws_route" "Private-rtb-route" {
 
 # associate all private subnets to the private route table
 resource "aws_route_table_association" "private-subnets-assoc" {
-  count          = length(aws_subnet.private.*.id)
-  subnet_id      = element(aws_subnet.private.*.id, count.index)
+  count          = length(aws_subnet.private[*].id)
+  subnet_id      = element(aws_subnet.private[*].id, count.index)
   route_table_id = aws_route_table.private-rtb.id
 }
 
@@ -40,7 +40,7 @@ resource "aws_route_table" "public-rtb" {
 }
 
 # create route for the public route table and attach the internet gateway
-resource "aws_route" "public-rtb-route" {
+resource "aws_route_table" "public-rtb-table" {
   route_table_id         = aws_route_table.public-rtb.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.ig.id
@@ -48,7 +48,7 @@ resource "aws_route" "public-rtb-route" {
 
 # associate all public subnets to the public route table
 resource "aws_route_table_association" "public-subnets-assoc" {
-  count          = length(aws_subnet.public.*.id)
-  subnet_id      = element(aws_subnet.public.*.id, count.index)
+  count          = length(aws_subnet.public[*].id)
+  subnet_id      = element(aws_subnet.public[*].id, count.index)
   route_table_id = aws_route_table.public-rtb.id
-}*/
+}

@@ -1,4 +1,4 @@
-/*variable "region" {
+variable "region" {
 }
 
 variable "vpc_cidr" {
@@ -56,4 +56,3 @@ variable "name" {
 variable "environment" {
   default = "true"
 }
-*/

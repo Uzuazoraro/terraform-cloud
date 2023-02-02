@@ -1,4 +1,4 @@
-/*variable "ami-web" {
+variable "ami-web" {
   type = string
   description = "ami for webservers"
 }
@@ -53,7 +53,6 @@ variable "wordpress-alb-tgt" {
   description = "wordpress application to internal loadbalancer"
 }
 
-
 variable "tooling-alb-tgt" {
   type = string
   description = "tooling application to internal loadbalancer"
@@ -83,4 +82,4 @@ variable "tags" {
   description = "A mapping of tags to assign to all resuorces"
   type        = map(string)
   default     = {}
-}*/
+}
