@@ -1,4 +1,4 @@
-/*resource "aws_eip" "nat_eip" {
+resource "aws_eip" "nat_eip" {
   vpc        = true
   depends_on = [aws_internet_gateway.ig]
 
@@ -21,4 +21,4 @@ resource "aws_nat_gateway" "nat" {
       Name = format("%s-NAT-%s", var.name, var.environment)
     },
   )
-}*/
+}

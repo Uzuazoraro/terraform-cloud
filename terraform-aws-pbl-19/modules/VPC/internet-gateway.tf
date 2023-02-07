@@ -1,4 +1,4 @@
-/*resource "aws_internet_gateway" "ig" {
+resource "aws_internet_gateway" "ig" {
   vpc_id = aws_vpc.main.id
 
   tags = merge(
@@ -7,4 +7,4 @@
       Name = format("%s-%s-%s!", var.name, aws_vpc.main.id, "IG")
     },
   )
-}*/
+}
