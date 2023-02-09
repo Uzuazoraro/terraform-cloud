@@ -39,4 +39,3 @@ sudo openssl req -newkey rsa:2048 -nodes -keyout /etc/pki/tls/private/ACS.key -x
 sudo sed -i 's/localhost.crt/ACS.crt/g'  /etc/httpd/conf.d/ssl.conf
 
 sudo sed -i 's/localhost.key/ACS.key/g'  /etc/httpd/conf.d/ssl.conf
-Footer

@@ -15,7 +15,7 @@ source "amazon-ebs" "terraform-nginx-prj-19" {
   region        = var.region
   source_ami_filter {
     filters = {
-      name                = "RHEL-8.2_HVM-20200803-x86_64-0-Hourly2-GP2"
+      name                = "RHEL-8.6.0_HVM-20220503-x86_64-2-Hourly2-GP2"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
