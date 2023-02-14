@@ -1,4 +1,4 @@
-/*# Creating bucket for s3 backend
+# Creating bucket for s3 backend
 
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "micolo-dev-terraform-bucket"
@@ -135,4 +135,3 @@ module "compute" {
   sg-compute      = [module.security.compute-sg]
   keypair         = var.keypair
 }
-*/
