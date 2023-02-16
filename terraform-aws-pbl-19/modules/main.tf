@@ -36,8 +36,8 @@ resource "aws_dynamodb_table" "terraform_locks" {
 modules "VPC" {
   source                              = "./modules/VPC"
   name                                = var.name
-  environment                        = var.environment
-  region                             = var.region
+  environment                         = var.environment
+  region                              = var.region
   vpc_cidr                            = var.vpc_cidr
   enable_dns_support                  = var.enable_dns_support
   enable_dns_hostnames                = var.enable_dns_hostnames
@@ -87,9 +87,9 @@ module "Autoscaling" {
   ami-web           = var.ami
   ami-bastion       = var.ami
   ami-nginx         = var.ami
-  desired_capacity  = 2
-  min_size          = 2
-  max_size          = 2
+  desired_capacity  = var.desired_capacity
+  min_size          = var.min_size
+  max_size          = var.max_size
   web-sg            = [module.security.web-sg]
   bastion-sg        = [module.security.bastion-sg]
   nginx-sg          = [module.security.nginx-sg]
@@ -131,6 +131,7 @@ module "compute" {
   ami-jenkins     = var.ami-bastion
   ami-sonar       = var.ami-sonar
   ami-jfrog       = var.ami-bastion
+  ami-nginx       = var.ami-nginx
   subnets-compute = module.VPC.public_subnets-1
   sg-compute      = [module.security.compute-sg]
   keypair         = var.keypair

@@ -38,7 +38,7 @@ resource "aws_lb_target_group" "nginx-tgt" {
 }
 
 # Create Listener to listen to ALB
-
+/*
 resource "aws_lb_listener" "nginx-listener" {
   load_balancer_arn = aws_lb.ext-alb.arn
   port              = var.listener_port #443
@@ -50,7 +50,7 @@ resource "aws_lb_listener" "nginx-listener" {
     target_group_arn = aws_lb_target_group.nginx-tgt.arn
   }
 }
-
+*/
 # Create an Internal (Internal) Application Load Balancer (ALB)
 
 # ----------------------------
@@ -124,7 +124,7 @@ resource "aws_lb_target_group" "tooling-tgt" {
 
 # For this aspect a single listener was created for the wordpress which is default,
 # A rule was created to route traffic to tooling when the host header changes
-
+/*
 resource "aws_lb_listener" "web-listener" {
   load_balancer_arn = aws_lb.ialb.arn
   port              = var.listener_port #443
@@ -136,9 +136,9 @@ resource "aws_lb_listener" "web-listener" {
     target_group_arn = aws_lb_target_group.wordpress-tgt.arn
   }
 }
-
+*/
 # listener rule for tooling target
-
+/*
 resource "aws_lb_listener_rule" "tooling-listener" {
   listener_arn = aws_lb_listener.web-listener.arn
   priority     = 99
@@ -153,4 +153,4 @@ resource "aws_lb_listener_rule" "tooling-listener" {
       values = ["tooling.zireuz.ga"]
     }
   }
-}
+}*/

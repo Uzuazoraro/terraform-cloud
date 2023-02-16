@@ -22,13 +22,13 @@ variable "enable_classiclink_dns_support" {
 }
 
 variable "preferred_number_of_public_subnets" {
-  type        = number
-  description = "number of public subnets"
+  type        = list
+  description = "list of public subnets"
 }
 
 variable "preferred_number_of_private_subnets" {
-  type        = number
-  description = "number of private subnets"
+  type        = list
+  description = "list of private subnets"
 }
 
 variable "private_subnets" {

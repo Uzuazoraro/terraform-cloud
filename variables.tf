@@ -37,6 +37,19 @@ variable "private_subnets" {
   description = "list of private subnets"
 }
 
+variable "dbname" {
+    type = string
+}
+
+variable "master-username" {
+    type = string
+    description = "RDS master-username"
+}
+
+variable "master-password" {
+    type = string
+    description = "RDS master-password"
+}
 
 variable "public_subnets" {
   type = list
@@ -49,6 +62,11 @@ variable "tags" {
   default     = {}
 }
 
+variable "keypair" {
+  type = string
+  description = "keypair for the instances"
+}
+
 variable "name" {
   type = string
   description = "names of various concepts"
@@ -57,6 +75,13 @@ variable "name" {
 variable "environment" {
   default = "true"
 }
+
+
+variable "desired_capacity" {}
+
+variable "min_size" {}
+
+variable "max_size" {}
 
 variable "compute-sg" {}
 

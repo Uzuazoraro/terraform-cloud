@@ -1,4 +1,4 @@
-/*# Creating bucket for s3 backend
+# Creating bucket for s3 backend
 
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "micolo-dev-terraform-bucket"
@@ -84,12 +84,12 @@ module "security" {
 
 module "Autoscaling" {
   source            = "./modules/Autoscaling"
-  ami-web           = var.ami
-  ami-bastion       = var.ami
-  ami-nginx         = var.ami
-  desired_capacity  = 2
-  min_size          = 2
-  max_size          = 2
+  ami-web           = var.ami-var.min_web
+  ami-bastion       = var.ami-bastion
+  ami-nginx         = var.ami-nginx
+  desired_capacity  = var.desired_capacity
+  min_size          = var.min_size
+  max_size          = var.max_size
   web-sg            = [module.security.web-sg]
   bastion-sg        = [module.security.bastion-sg]
   nginx-sg          = [module.security.nginx-sg]
@@ -135,4 +135,3 @@ module "compute" {
   sg-compute      = [module.security.compute-sg]
   keypair         = var.keypair
 }
-*/
