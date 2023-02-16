@@ -49,7 +49,7 @@ modules "VPC" {
   public_subnets                      = [for i in range(2, 5, 2) : cidrsubnet(var.vpc_cidr, 8, i)]
 }
 
-# Module for Application Load Balancer. This will create External and Internal Load Balancer.
+# Module for Application Load Balancer. This will create External and Internal Ll;oad Balancer.
 
 module "ALB" {
   source                 = "./modules/ALB"
@@ -84,9 +84,9 @@ module "security" {
 
 module "Autoscaling" {
   source            = "./modules/Autoscaling"
-  ami-web           = var.ami
-  ami-bastion       = var.ami
-  ami-nginx         = var.ami
+  ami-web           = var.ami-web
+  ami-bastion       = var.ami-bastion
+  ami-nginx         = var.ami-nginx
   desired_capacity  = var.desired_capacity
   min_size          = var.min_size
   max_size          = var.max_size
