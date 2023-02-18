@@ -36,8 +36,8 @@ resource "aws_dynamodb_table" "terraform_locks" {
 modules "VPC" {
   source                              = "./modules/VPC"
   name                                = var.name
-  environment                         = var.environment
-  region                              = var.region
+  environment                        = var.environment
+  region                             = var.region
   vpc_cidr                            = var.vpc_cidr
   enable_dns_support                  = var.enable_dns_support
   enable_dns_hostnames                = var.enable_dns_hostnames
@@ -49,7 +49,7 @@ modules "VPC" {
   public_subnets                      = [for i in range(2, 5, 2) : cidrsubnet(var.vpc_cidr, 8, i)]
 }
 
-# Module for Application Load Balancer. This will create External and Internal Ll;oad Balancer.
+# Module for Application Load Balancer. This will create External and Internal Load Balancer.
 
 module "ALB" {
   source                 = "./modules/ALB"
@@ -84,7 +84,7 @@ module "security" {
 
 module "Autoscaling" {
   source            = "./modules/Autoscaling"
-  ami-web           = var.ami-web
+  ami-web           = var.ami-var.min_web
   ami-bastion       = var.ami-bastion
   ami-nginx         = var.ami-nginx
   desired_capacity  = var.desired_capacity
@@ -131,8 +131,6 @@ module "compute" {
   ami-jenkins     = var.ami-bastion
   ami-sonar       = var.ami-sonar
   ami-jfrog       = var.ami-bastion
-  ami-nginx       = var.ami-nginx
-  subnet_id       = var.subnets-compute
   subnets-compute = module.VPC.public_subnets-1
   sg-compute      = [module.security.compute-sg]
   keypair         = var.keypair
