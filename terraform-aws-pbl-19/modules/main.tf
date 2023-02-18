@@ -33,7 +33,7 @@ resource "aws_dynamodb_table" "terraform_locks" {
 # private subnets in range(1, 8, 2) means subnets should be odd numbers by adding 2 to the numbers btw 1 & 8. ie 1+2=3, 3+2=5, 5+2=7. So the private subnets are 1,3,5,7.   
 # creating VPC
 
-modules "VPC" {
+module "VPC" {
   source                              = "./modules/VPC"
   name                                = var.name
   environment                         = var.environment
