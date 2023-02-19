@@ -34,7 +34,7 @@ resource "aws_dynamodb_table" "terraform_locks" {
 # creating VPC
 
 module "VPC" {
-  source                              = "../../modules/VPC"
+  source                              = "./modules/VPC"
   name                                = var.name
   environment                         = var.environment
   region                              = var.region
@@ -52,7 +52,7 @@ module "VPC" {
 # Module for Application Load Balancer. This will create External and Internal Ll;oad Balancer.
 
 module "ALB" {
-  source                 = "../../modules/ALB"
+  source                 = "./modules/ALB"
   name                   = var.name
   vpc_id                 = module.VPC.vpc_id
   public-sg              = module.security.ALB-sg
@@ -76,14 +76,14 @@ module "ALB" {
 }
 
 module "security" {
-  source    = "../../modules/security"
+  source    = "./modules/security"
   vpc_id    = module.VPC.vpc_id
   access_ip = var.access_ip
   for_each  = var.security_groups
 }
 
 module "Autoscaling" {
-  source            = "../../modules/Autoscaling"
+  source            = "./modules/Autoscaling"
   ami-web           = var.ami-web
   ami-bastion       = var.ami-bastion
   ami-nginx         = var.ami-nginx
@@ -106,7 +106,7 @@ module "Autoscaling" {
 # zone and allow traffic from the webservers. 
 
 module "EFS" {
-  source       = "../../modules/EFS"
+  source       = "./modules/EFS"
   efs-subnet-1 = module.VPC.private_subnets-1
   efs-subnet-2 = module.VPC.private_subnets-2
   efs-sg       = [module.security.datalayer-sg]
@@ -116,7 +116,7 @@ module "EFS" {
 # RDS module: this module will create RDS instance in the private subnet
 
 module "RDS" {
-  source          = "../../modules/RDS"
+  source          = "./modules/RDS"
   dbname          = var.dbname
   master-username = var.master-username
   master-password = var.master-password
@@ -127,7 +127,7 @@ module "RDS" {
 
 # This module creates instances for Jenkins, Sonarqube and Jfrog
 module "compute" {
-  source          = "../../modules/Compute"
+  source          = "./modules/Compute"
   ami-jenkins     = var.ami-bastion
   ami-sonar       = var.ami-sonar
   ami-jfrog       = var.ami-bastion
