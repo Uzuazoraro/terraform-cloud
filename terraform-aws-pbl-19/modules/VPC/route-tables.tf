@@ -41,6 +41,7 @@ resource "aws_route_table" "public-rtb" {
 
 # create route for the public route table and attach the internet gateway
 resource "aws_route_table" "public-rtb-table" {
+  vpc_id                 = aws_vpc.main.id
   route_table_id         = aws_route_table.public-rtb.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.ig.id

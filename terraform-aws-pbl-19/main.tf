@@ -86,7 +86,7 @@ module "Autoscaling" {
   source            = "./modules/Autoscaling"
   ami-web           = var.ami-web
   ami-bastion       = var.ami-bastion
-  ami-nginx         = var.ami-nginx
+  image_id          = var.ami-nginx
   desired_capacity  = var.desired_capacity
   min_size          = var.min_size
   max_size          = var.max_size
@@ -110,7 +110,6 @@ module "EFS" {
   efs-subnet-1 = module.VPC.private_subnets-1
   efs-subnet-2 = module.VPC.private_subnets-2
   efs-sg       = [module.security.datalayer-sg]
-  account_no   = var.account_no
 }
 
 # RDS module: this module will create RDS instance in the private subnet
@@ -130,10 +129,10 @@ module "compute" {
   source          = "./modules/Compute"
   ami-jenkins     = var.ami-bastion
   ami-sonar       = var.ami-sonar
-  ami-jfrog       = var.ami-bastion
-  ami-nginx       = var.ami-nginx
-  subnet_id       = var.subnets-compute
+  ami             = var.ami-jfrog
+ # ami-nginx       = var.ami-nginx
+ # subnet_id       = var.subnets-compute
   subnets-compute = module.VPC.public_subnets-1
-  sg-compute      = [module.security.compute-sg]
+  compute-sg      = [module.security.compute-sg]
   keypair         = var.keypair
 }

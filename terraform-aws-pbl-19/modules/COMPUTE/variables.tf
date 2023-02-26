@@ -20,7 +20,7 @@ variable "ami-jfrog" {
 
 variable "subnets-compute" {
   type = list(any)
-  description = "list of compute subnet"
+  description = "subnet id"
 }
 
 variable "keypair" {

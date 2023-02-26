@@ -1,5 +1,5 @@
 variable "region" {
-    default = string
+    type = string
 }
 
 variable "vpc_cidr" {
@@ -82,6 +82,8 @@ variable "desired_capacity" {}
 variable "min_size" {}
 
 variable "max_size" {}
+
+variable "ami-nginx" {}
 
 variable "compute-sg" {}
 
